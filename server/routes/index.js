@@ -8,7 +8,9 @@ module.exports = (app) => {
   app.post('/login', UserController.login);
 
   //app.post('/shelters', middleware.authenticate, ShelterController.create);
- //app.get('/users/:id', UserController.listusers);
+ app.get('/users/:id', UserController.findUser);
+ app.get('/users', UserController.listUsers);
+
 
 //  app.post('/shelters/:shelterId/animals', AnimalController.create);
 //  app.put('/shelters/:shelterId/animals/:id', AnimalController.update);

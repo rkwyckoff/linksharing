@@ -8,7 +8,7 @@ module.exports = {
     var salt = bcrypt.genSaltSync(10);
     var hashedPass = bcrypt.hashSync(req.body.password, salt);
     User.create({
-      username: req.body.name,
+      username: req.body.username,
       email: req.body.email,
       password: hashedPass,
       salt: salt,
@@ -41,5 +41,16 @@ module.exports = {
         }
       })
       .catch(error => res.status(400).send(error));
-  }
+  },
+      listUsers (req, res) {
+        User.findAll({
+      })
+        .then(users => res.status(200).send(users))
+        .catch(error => res.status(400).send(error));
+      },
+      findUser (req, res) {
+        User.findById(req.params.id)
+        .then(users => res.status(201).send(users))
+        .catch(error => res.status(400).send(error));
+      },
 };
