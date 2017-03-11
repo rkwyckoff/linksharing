@@ -8,7 +8,7 @@ module.exports = {
     var salt = bcrypt.genSaltSync(10);
     var hashedPass = bcrypt.hashSync(req.body.password, salt);
     User.create({
-      name: req.body.name,
+      username: req.body.name,
       email: req.body.email,
       password: hashedPass,
       salt: salt,
@@ -30,7 +30,7 @@ module.exports = {
 
         var input = bcrypt.hashSync(req.body.password, user.salt);
         if (input === user.password) {
-          var token = jwt.encode({ id: user.id, name: user.name }, appSecrets.jwtSecret);
+          var token = jwt.encode({ id: user.id, username: user.username }, appSecrets.jwtSecret);
           var json = {
             user: user,
             token: token
