@@ -27,9 +27,10 @@ module.exports = {
         if (!user) {
           return res.status(401).send({ message: "No such email or wrong password." });
         }
-
+        console.log("about to hash password ", user);
         var input = bcrypt.hashSync(req.body.password, user.salt);
         if (input === user.password) {
+          console.log("About to encode token");
           var token = jwt.encode({ id: user.id, username: user.username }, appSecrets.jwtSecret);
           var json = {
             user: user,
@@ -42,15 +43,54 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+
+
+    listAnimals (req, res) {
+      Animal.findAll({
+        where: {
+          shelterId: req.params.id
+        }
+      })
+        .then(animals => res.status(200).send(animals))
+        .catch(error => res.status(400).send(error));
+    },
+
+
+  createLink (req, res) {
+    console.log("The current user is ", req.user);
+
+    User.createLink({
+      username: req.body.username,
+      password: req.body.password
+    })
+      .then(shelter => res.status(201).send(shelter))
+      .catch(error => res.status(400).send(error));
+  },
+
+
+  listAnimals (req, res) {
+    Animal.findAll({
+      where: {
+        shelterId: req.params.id
+      }
+    })
+      .then(animals => res.status(200).send(animals))
+      .catch(error => res.status(400).send(error));
+  },
+
+
+
       listUsers (req, res) {
         User.findAll({
       })
         .then(users => res.status(200).send(users))
         .catch(error => res.status(400).send(error));
       },
+
       findUser (req, res) {
         User.findById(req.params.id)
         .then(users => res.status(201).send(users))
         .catch(error => res.status(400).send(error));
-      },
+      }
+
 };
