@@ -30,7 +30,7 @@ module.exports = {
 
         // Otherwise, attach the user to the request object.
         req.user = user;
-        res.status(200).send({message: "Success", })
+        //res.status(200).send({message: "Success", })
         next();
       });
 

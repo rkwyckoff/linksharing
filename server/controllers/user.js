@@ -2,7 +2,7 @@ const User = require("../models").User;
 const bcrypt = require("bcryptjs");
 const jwt = require("jwt-simple");
 const appSecrets = require("../config/secrets");
-const middleware = require("../middleware/index");
+
 
 module.exports = {
   register (req, res) {
