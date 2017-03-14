@@ -26,5 +26,37 @@ To authenticate:
 POST localhost:8000/authenticate
 
 Parameters in the headers section!:
+access-token:  value: (token supplied at login)
 
-access-token    value  //token is supplied upon successful login
+
+To create a link (must be logged in):
+
+POST localhost:8000/link
+
+Parameters required in the headers section!:
+access-token:  value: (token supplied at login)
+
+Required in the body:
+title:    string
+contents:   string  
+
+
+To post a comment:
+
+POST localhost:8000/link/:id/comment
+(Required in the url: substitute link_id for :id)
+
+Parameters required in the headers section!:
+access-token:  value: (token supplied at login)
+Required in the body:
+comment:    value:
+
+To get a list of all links by most recent and descending:
+
+GET localhost:8000/link
+
+
+To get a list of all comments by link id:
+
+GET localhost:8000/link/:id/comment
+(Required in the url: substitute link_id for :id)
